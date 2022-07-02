@@ -1,0 +1,15 @@
+module NaiSysUI.Components
+NaiSysAbstractPopup 1.0 components/NaiSysAbstractPopup.qml  
+NaiSysLoadingPopup 1.0 components/NaiSysLoadingPopup.qml    
+NaiSysTabWidget 1.0 components/NaiSysTabWidget.qml
+NaiSysDialogBox 1.0 components/NaiSysDialogBox.qml      
+NaiSysNavigationPane 1.0 components/NaiSysNavigationPane.qml  
+NaiSysTronWidget 1.0 components/NaiSysTronWidget.qml     
+NaiSysProfileHeader 1.0 components/NaiSysProfileHeader.qml
+NaiSysListView 1.0 components/NaiSysListView.qml
+NaiSysTable 1.0 components/NaiSysTable.qml
+
+module NaiSysUI.Layouts
+NaiSysDashLayout 1.0 layouts/NaiSysDashLayout.qml  
+NaiSysFormLayout 1.0 layouts/NaiSysFormLayout.qml  
+NaiSysNavigationLayout 1.0 layouts/NaiSysNavigationLayout.qml
