@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 Item {
     id: root
     function newTab(name, source){}
-    
+
     property int headerHeight: 35
     property ListModel stackModel: ListModel{
       ListElement{name: "Home"; source: ""}
