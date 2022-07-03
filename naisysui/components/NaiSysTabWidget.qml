@@ -4,7 +4,12 @@ import QtQuick.Layouts 1.3
 
 Item {
     id: root
-    function newTab(name, source){}
+    function newTab(m_name, m_source){
+      stackModel.append({m_name, m_source});
+    }
+    function removeTab(m_index) {
+        // body...
+    }
 
     property int headerHeight: 35
     property ListModel stackModel: ListModel{
@@ -27,6 +32,9 @@ Item {
               height: parent.height
               width: 120
               text: model["name"]
+              onClicked{
+                root_body_loader.source = model["source"];
+              }
             }
           }
         }
@@ -35,8 +43,8 @@ Item {
         id: root_body
         height: parent.height - headerHeight
         width: parent.width
-        StackLayout{
-          id: root_body_stack
+        Loader{
+          id: root_body_loader
           anchors.fill: parent
         }
       }
