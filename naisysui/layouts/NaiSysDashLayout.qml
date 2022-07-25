@@ -7,6 +7,8 @@ Item{
     id: root
 
     property Component cmp_body
+    property string cardColor: "light grey"
+    property double cardOpacity: 0.8
     property ListModel mdl_header : ListModel{
         ListElement{title:"Employees On Duty"; data:""}
         ListElement{title:"Employees On Leave"; data:""}
@@ -30,9 +32,9 @@ Item{
             Repeater{
                 model: mdl_header
                 Rectangle{
-                    color: "teal"
+                    color: cardColor
                     Layout.fillHeight: true; Layout.fillWidth: true
-                    opacity: 0.6
+                    opacity: cardOpacity
                     radius: 5
                     Column{
                         anchors.fill: parent
