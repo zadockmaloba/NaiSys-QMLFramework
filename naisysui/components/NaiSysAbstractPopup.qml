@@ -7,7 +7,7 @@ Popup{
     id: root
     property Component cmp_delegate
 
-    function setActicveComponent(comp){
+    function setActiveComponent(comp){
         contentloader.sourceComponent = comp;
     }
 
