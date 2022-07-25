@@ -10,10 +10,10 @@ Item{
     property string cardColor: "light grey"
     property double cardOpacity: 0.8
     property ListModel mdl_header : ListModel{
-        ListElement{title:"Employees On Duty"; data:""}
-        ListElement{title:"Employees On Leave"; data:""}
-        ListElement{title:"Active Job Openings"; data:""}
-        ListElement{title:"Active Job Applications"; data:""}
+        ListElement{title:"Data 1"; data:""}
+        ListElement{title:"Data 2"; data:""}
+        ListElement{title:"Data 3"; data:""}
+        ListElement{title:"Data 4"; data:""}
     }
 
     Item {
