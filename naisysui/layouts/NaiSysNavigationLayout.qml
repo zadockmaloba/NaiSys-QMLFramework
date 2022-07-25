@@ -68,7 +68,7 @@ Item {
             Loader{
                 id: root_body_contentDiv_loader
                 anchors.fill: parent
-                source: mdl_pageArray.get(0)["cardobj"]
+                source: mdl_pageArray.get(0)["source"]
                 onLoaded: {
                     console.log("[COMPONENT LOADED]");
                     if(root_body_contentDiv_loader.item.page_menu_bar){
