@@ -50,7 +50,7 @@ Rectangle{
                 width: root.width
                 height: 25
                 onClicked: {
-                    ld_view.setSource(model["cardobj"]);
+                    ld_view.setSource(model["source"]);
                 }
                 Rectangle{
                     anchors.fill: parent
