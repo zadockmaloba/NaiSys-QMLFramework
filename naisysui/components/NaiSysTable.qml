@@ -7,22 +7,61 @@ import Qt.labs.qmlmodels 1.0
 Item {
     id: root
 
+    function mdlToKeyArray(_mdl){
+        var jsarr = [];
+        var _count = 0;
+        if(_mdl){
+            jsarr.push(_mdl.get(0));
+            var _keys = jsarr.map(function(element){return Object.keys(element)});
+            console.log(_keys[0].length);
+            root.columnCount = _keys[0].length;
+            return _keys[0];
+        }
+    }
+
     function mdlToJsonArr(_mdl){
         var jsarr = [];
         for (var i = 0; i < _mdl.count; ++i) jsarr.push(_mdl.get(i));
         return jsarr;
     }
+
     function mdlToJsonObj(_mdl){
         var jsarr = {}
         for (var i = 0; i < _mdl.count; ++i) jsarr += (_mdl.get(i));
         return jsarr;
     }
 
+    function formatValues(lbl, val){
+        for(var i = 0; i < map_format.count; ++i){
+            var mdl = map_format.get(i)
+            if(mdl["label"] === lbl){
+                return mdl["callback"](val);
+            }
+        }
+        return val;
+    }
+
     property var locale: Qt.locale()
     property string title: "TABLE"
-    property ListModel mdl_data
-    property ListModel mdl_header
+    property int columnCount: 0
+
+    //When using manual headers you will also have to set the column ciunt manually
+    property bool automaticHeader: false
+    property ListModel mdl_header : ListModel{
+        ListElement{label: "First Col."; value: "data1"}
+        ListElement{label: "Second Col."; value: "data2"}
+        ListElement{label: "Third Col."; value: "data3"}
+    }
+
+    property ListModel mdl_data : ListModel{
+        ListElement{data1: "abcd"; data2: "abcd"; data3: "abcd"}
+        ListElement{data1: "efgh"; data2: "efgh"; data3: "efgh"}
+    }
+
     property bool showRowNumber: false
+    property ListModel map_format : ListModel{
+        ListElement{label: "data2"; callback: (str)=>{return str.toUpperCase()}}
+    }
 
     Column{
         anchors.fill: parent
@@ -55,13 +94,13 @@ Item {
                 Row{
                     anchors.fill: parent
                     Repeater{
-                        model: mdl_header
+                        model: automaticHeader ? mdlToKeyArray(mdl_data) : mdl_header
                         delegate: Item {
                             height: parent.height
-                            width: parent.width / mdl_header.count
+                            width: parent.width / root.columnCount
                             Text {
                                 anchors.centerIn: parent
-                                text: qsTr(model["_label"])
+                                text: automaticHeader ? modelData : qsTr(model["label"])
                                 font.family: "Arial"
                                 font.pointSize: 10
                                 font.bold: true
@@ -89,27 +128,17 @@ Item {
                             width: root_body_tableDiv.width
                             spacing: 2
                             Repeater{
-                                model: mdl_header
+                                model: automaticHeader ? mdlToKeyArray(mdl_data) : mdl_header
                                 delegate: Rectangle{
                                     height: parent.height
-                                    width: parent.width / mdl_header.count
+                                    width: parent.width / root.columnCount
                                     Text {
-                                        //anchors.verticalCenter: parent.verticalCenter
-                                        property string displayText: rowDelegate._mdl[model["_val"]]
+                                        property string displayLabel:automaticHeader ? modelData : model["value"]
+                                        property string displayText: rowDelegate._mdl[displayLabel]
                                         anchors.centerIn: parent
                                         Component.onCompleted: {
-                                            if(model["_label"] === "Date")
-                                            {
-                                                var _d = Date.fromLocaleString(locale, rowDelegate._mdl[model["_val"]], "yyyyMMddhhmmss");
-                                                var _txt = _d.toLocaleString(locale, "dd-MMMM-yyyy");
-                                                displayText = _txt;
-                                            }
-                                            else if(model["_label"] === "Time")
-                                            {
-                                                var _t = Date.fromLocaleString(locale, rowDelegate._mdl[model["_val"]], "yyyyMMddhhmmss");
-                                                var _txtT = _t.toLocaleString(locale, "hh:mm:ss");
-                                                displayText = _txtT;
-                                            }
+                                            var temp = displayText;
+                                            displayText = root.formatValues(displayLabel, temp);
                                         }
                                         text: displayText
                                     }
