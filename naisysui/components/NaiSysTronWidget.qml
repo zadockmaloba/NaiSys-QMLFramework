@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.12
-//import Qt5Compat.GraphicalEffects
+import Qt5Compat.GraphicalEffects
 
 Item {
     id: root
@@ -34,17 +34,17 @@ Item {
                 anchors.fill: parent
                 source: mdl_AppModel.get(0).imgurl
                 fillMode: Image.PreserveAspectCrop
-//                layer.enabled: true
-//                layer.effect: OpacityMask {
-//                    maskSource: Item {
-//                        width: imageDiv.width
-//                        height: imageDiv.height
-//                        Rectangle {
-//                            anchors.fill: parent
-//                            radius: 5
-//                        }
-//                    }
-//                }
+                layer.enabled: true
+                layer.effect: OpacityMask {
+                    maskSource: Item {
+                        width: imageDiv.width
+                        height: imageDiv.height
+                        Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                        }
+                    }
+                }
             }
         }
         Item{
