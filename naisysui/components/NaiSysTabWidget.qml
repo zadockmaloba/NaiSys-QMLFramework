@@ -7,11 +7,15 @@ Item {
     function newTab(m_name, m_source){
         bufferModel.append({name: m_name, source: m_source});
     }
+    function newTabComponent(m_name, m_source){
+        bufferModel.append({name: m_name, source: "", sourceComponent: m_source});
+    }
     function removeTab(m_index) {
         bufferModel.remove(m_index);
     }
 
     property int headerHeight: 30
+    property bool initAll: false
     property ListModel stackModel: ListModel{
         ListElement{name: "Home"; source: ""}
         ListElement{name: "Settings"; source: ""}
@@ -35,7 +39,12 @@ Item {
 
     Component.onCompleted: {
         if(!homeView){
-            bufferModel.append(stackModel.get(0));
+            if(root.initAll){
+                for(var i=0; i<stackModel.count;++i){
+                    bufferModel.append(stackModel.get(i));
+                }
+            }
+            else bufferModel.append(stackModel.get(0));
         }
         else{
             bufferModel.append({name: "Home", source: "", sourceComponent: homeView});
