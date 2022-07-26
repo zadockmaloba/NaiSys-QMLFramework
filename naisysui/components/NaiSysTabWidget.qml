@@ -74,6 +74,10 @@ Item {
                                 opacity: 0.7
                                 border.color: "white"
                                 color: index === root_body_stack.currentIndex ? "grey" : "light grey"
+                                gradient: Gradient{
+                                    GradientStop{position: 0; color: "light grey"}
+                                    GradientStop{position: 1; color: index === root_body_stack.currentIndex ? "grey" : "light grey"}
+                                }
                             }
                         }
                     }
