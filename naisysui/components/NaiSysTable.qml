@@ -4,6 +4,10 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.12
 import Qt.labs.qmlmodels 1.0
 
+/*
+  FIXME: Find a way to implement a sticky header in the scrollView
+*/
+
 Item {
     id: root
 
@@ -13,8 +17,11 @@ Item {
         if(_mdl){
             jsarr.push(_mdl.get(0));
             var _keys = jsarr.map(function(element){return Object.keys(element)});
-            console.log(_keys[0].length);
             root.columnCount = _keys[0].length;
+            mdl_header.clear()
+            for (var i = 0; i<root.columnCount; ++i){
+                mdl_header.append({label: _keys[0][i], value: _keys[0][i]})
+            }
             return _keys[0];
         }
     }
@@ -44,6 +51,7 @@ Item {
     property var locale: Qt.locale()
     property string title: "TABLE"
     property int columnCount: 0
+    property int minWidth: 0
 
     //When using manual headers you will also have to set the column ciunt manually
     property bool automaticHeader: false
@@ -54,8 +62,8 @@ Item {
     }
 
     property ListModel mdl_data : ListModel{
-        ListElement{data1: "abcd"; data2: "abcd"; data3: "abcd"}
-        ListElement{data1: "efgh"; data2: "efgh"; data3: "efgh"}
+//        ListElement{data1: "abcd"; data2: "abcd"; data3: "abcd"}
+//        ListElement{data1: "efgh"; data2: "efgh"; data3: "efgh"}
     }
 
     property bool showRowNumber: false
@@ -94,13 +102,13 @@ Item {
                 Row{
                     anchors.fill: parent
                     Repeater{
-                        model: automaticHeader ? mdlToKeyArray(mdl_data) : mdl_header
+                        model: mdl_header //automaticHeader ? mdlToKeyArray(mdl_data) : mdl_header
                         delegate: Item {
                             height: parent.height
-                            width: parent.width / root.columnCount
+                            width: (parent.width / root.columnCount) <= root.minWidth ? root.minWidth : (parent.width / root.columnCount)
                             Text {
                                 anchors.centerIn: parent
-                                text: automaticHeader ? modelData : qsTr(model["label"])
+                                text: model["value"] //automaticHeader ? "TEST" : qsTr(model["label"])
                                 font.family: "Arial"
                                 font.pointSize: 10
                                 font.bold: true
@@ -131,7 +139,7 @@ Item {
                                 model: automaticHeader ? mdlToKeyArray(mdl_data) : mdl_header
                                 delegate: Rectangle{
                                     height: parent.height
-                                    width: parent.width / root.columnCount
+                                    width: (parent.width / root.columnCount) <= root.minWidth ? root.minWidth : (parent.width / root.columnCount)
                                     Text {
                                         property string displayLabel:automaticHeader ? modelData : model["value"]
                                         property string displayText: rowDelegate._mdl[displayLabel]
