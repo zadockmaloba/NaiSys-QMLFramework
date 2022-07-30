@@ -15,7 +15,8 @@ Rectangle{
     Column{
         anchors.fill: parent
         spacing: 2
-        ItemDelegate{
+        ToolButton{
+            //FIXME: Binding loop
             width: root.width
             height: 25
             onClicked: {
