@@ -14,5 +14,6 @@
         <file>layouts/NaiSysFormLayout.qml</file>
         <file>layouts/NaiSysNavigationLayout.qml</file>
         <file>layouts/qmldir</file>
+        <file>layouts/NaiSysStackLayout.qml</file>
     </qresource>
 </RCC>
