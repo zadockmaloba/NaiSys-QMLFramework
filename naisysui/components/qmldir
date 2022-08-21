@@ -8,3 +8,5 @@ NaiSysTronWidget 1.0 NaiSysTronWidget.qml
 NaiSysProfileHeader 1.0 NaiSysProfileHeader.qml
 NaiSysListView 1.0 NaiSysListView.qml
 NaiSysTable 1.0 NaiSysTable.qml
+NaiSysMenuBar 1.0 NaiSysMenuBar.qml
+# plugin naisysqmlmenubar
