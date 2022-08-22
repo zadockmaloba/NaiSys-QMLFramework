@@ -6,10 +6,13 @@ import QtQuick.Controls.Material 2.12
 Popup{
     id: root
     property Component cmp_delegate
+    property double background_opacity: 0.98
 
     function setActiveComponent(comp){
         contentloader.sourceComponent = comp;
     }
+
+    opacity: background_opacity
 
     Loader{
         id: contentloader
