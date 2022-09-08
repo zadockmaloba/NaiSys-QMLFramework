@@ -94,6 +94,7 @@ Item {
                         id: addTabButton
                         height: parent.height
                         width: 40
+                        enabled: !initAll
                         text: "+"
                         onClicked: {
                             contextMenu.open();
