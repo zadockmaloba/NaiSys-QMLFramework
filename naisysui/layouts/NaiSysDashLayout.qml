@@ -35,7 +35,7 @@ Item{
                     color: cardColor
                     Layout.fillHeight: true; Layout.fillWidth: true
                     opacity: cardOpacity
-                    radius: 5
+                    radius: 2
                     Column{
                         anchors.fill: parent
                         Item {
