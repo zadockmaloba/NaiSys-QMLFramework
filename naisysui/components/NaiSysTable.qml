@@ -52,6 +52,7 @@ Item {
     property string title: "TABLE"
     property int columnCount: 0
     property int minWidth: 0
+    property bool editable: false
 
     //When using manual headers you will also have to set the column ciunt manually
     property bool automaticHeader: false
@@ -83,6 +84,20 @@ Item {
                 font.pointSize: 12
                 font.bold: true
                 font.family: "Arial"
+            }
+            Button{
+                id: addRowBtn
+                width: 40
+                height: parent.height * 0.8
+                text: "+"
+                font.family: "Arial"
+                font.bold: true
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                enabled: root.editable
+                onClicked: {
+                    mdl_data.append({});
+                }
             }
         }
         Item{
@@ -140,15 +155,18 @@ Item {
                                 delegate: Rectangle{
                                     height: parent.height
                                     width: (parent.width / root.columnCount) <= root.minWidth ? root.minWidth : (parent.width / root.columnCount)
-                                    Text {
+                                    clip: true
+                                    TextField {
                                         property string displayLabel:automaticHeader ? modelData : model["value"]
                                         property string displayText: rowDelegate._mdl[displayLabel]
+                                        readOnly: !editable
                                         anchors.centerIn: parent
                                         Component.onCompleted: {
                                             var temp = displayText;
                                             displayText = root.formatValues(displayLabel, temp);
                                         }
                                         text: displayText
+                                        background: Item{}
                                     }
                                 }
                             }
