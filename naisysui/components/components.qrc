@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Thx_AbstractView.qml</file>
+        <file>Thx_MenuBar.qml</file>
+        <file>Thx_Button.qml</file>
+        <file>Thx_ListWidget.qml</file>
+        <file>Thx_TableWidget.qml</file>
+        <file>Thx_TabWidget.qml</file>
+        <file>Thx_InputField.qml</file>
+        <file>Thx_TextArea.qml</file>
+        <file>Thx_MenuButton.qml</file>
+        <file>Thx_MenuWidget.qml</file>
+        <file>Thx_InputForm.qml</file>
+        <file>Thx_Label.qml</file>
+        <file>Thx_Text.qml</file>
+        <file>Thx_ComboBox.qml</file>
+        <file>Thx_TabButton.qml</file>
+        <file>Thx_ImageCard.qml</file>
+        <file>Thx_TronCard.qml</file>
+        <file>Thx_SlideShow.qml</file>
+    </qresource>
+</RCC>
